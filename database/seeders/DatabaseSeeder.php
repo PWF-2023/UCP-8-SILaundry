@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Service;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -31,6 +34,9 @@ class DatabaseSeeder extends Seeder
                 'is_admin' => true
             ]
         );
-        User::factory(10)->create();
+        User::factory(100)->create();
+        Service::factory(10)->create();
+        Transaction::factory(100)->create();
+
     }
 }
