@@ -15,9 +15,9 @@ class Transaction extends Model
         'layanan_id',
         'berat',
         'total_harga',
-        'is_complete',
         'tgl_masuk',
         'tgl_keluar',
+        'is_complete',
     ];
 
     public function user()
