@@ -5,19 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Transaksi extends Model
+class Service extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'customer',
+        'title',
+        'harga',
         'user_id',
-        'layanan_id',
-        'berat',
-        'total_harga',
-        'is_complete',
-        'tgl_masuk',
-        'tgl_keluar',
     ];
 
     public function user()
@@ -25,8 +20,8 @@ class Transaksi extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function layanan()
+    public function transactions()
     {
-        return $this->belongsTo(Layanan::class);
+        return $this->hasMany(Transaction::class);
     }
 }
