@@ -24,7 +24,7 @@ class TransactionController extends Controller
     {
         $request->validate([
             'customer' => 'required|max:255',
-            // 'service_id' => 'required|exists:services,id',
+            'service_id' => 'nullable',
             'berat' => 'required|numeric',
             'tgl_masuk' => 'required|date',
             'tgl_keluar' => 'required|date',
@@ -33,8 +33,8 @@ class TransactionController extends Controller
         $service = Service::find($request->service_id);
 
         $transaction = Transaction::create([
-            'customer' => $request->customer,
-            // 'service_id' => $request->service_id,
+            'customer' => ucfirst($request->customer),
+            'service_id' => $request->service_id,
             'berat' => $request->berat,
             'total_harga' => $request->berat * $service->harga,
             'tgl_masuk' => $request->tgl_masuk,
@@ -48,21 +48,26 @@ class TransactionController extends Controller
 
     public function create()
     {
-        $services = Service::all();
+        $services = Service::where('user_id', auth()->user()->id)->get();
         return view('transaction.create', compact('services'));
     }
 
     public function edit(Transaction $transaction)
     {
-        $services = Service::all();
-        return view('transaction.edit', compact('transaction', 'services'));
+        $services = Service::where('user_id', auth()->user()->id)->get();
+
+        if (auth()->user()->id == $transaction->user_id) {
+            return view('transaction.edit', compact('transaction', 'services'));
+        } else {
+            return redirect()->route('transaction.index')->with('danger', 'You are not authorized to edit this transaction!');
+        }
     }
 
     public function update(Request $request, Transaction $transaction)
     {
         $request->validate([
             'customer' => 'required|max:255',
-            // 'service_id' => 'required|exists:services,id',
+            'service_id' => 'nullable',
             'berat' => 'required|numeric',
             'tgl_masuk' => 'required|date',
             'tgl_keluar' => 'required|date',
@@ -71,8 +76,8 @@ class TransactionController extends Controller
         $service = Service::find($request->service_id);
 
         $transaction->update([
-            'customer' => $request->customer,
-            // 'service_id' => $request->service_id,
+            'customer' => ucfirst($request->customer),
+            'service_id' => $request->service_id,
             'berat' => $request->berat,
             'total_harga' => $request->berat * $service->harga,
             'tgl_masuk' => $request->tgl_masuk,
@@ -93,6 +98,7 @@ class TransactionController extends Controller
             return redirect()->route('transaction.index')->with('danger', 'You are not authorized to complete this transaction!');
         }
     }
+
     public function uncomplete(Transaction $transaction)
     {
         if (auth()->user()->id == $transaction->user_id) {
@@ -104,6 +110,7 @@ class TransactionController extends Controller
             return redirect()->route('transaction.index')->with('danger', 'You are not authorized to uncomplete this transaction!');
         }
     }
+
     public function destroy(Transaction $transaction)
     {
         if (auth()->user()->id == $transaction->user_id) {
@@ -112,5 +119,18 @@ class TransactionController extends Controller
         } else {
             return redirect()->route('transaction.index')->with('danger', 'You are not authorized to delete this transaction!');
         }
+    }
+
+    public function destroyCompleted()
+    {
+        $transactionsCompleted = Transaction::where('user_id', auth()->user()->id)
+            ->where('is_complete', true)
+            ->get();
+
+        foreach ($transactionsCompleted as $transaction) {
+            $transaction->delete();
+        }
+
+        return redirect()->route('transaction.index')->with('success', 'All completed transactions deleted successfully!');
     }
 }
