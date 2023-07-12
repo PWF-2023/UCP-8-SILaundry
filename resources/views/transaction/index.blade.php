@@ -11,7 +11,7 @@
                 <div class="p-6 text-xl text-gray-900 dark:text-gray-100">
                     <div class="flex items-center justify-between">
                         <div>
-                            <x-create-button href="{{ route('todo.create') }}" />
+                            <x-create-button href="{{ route('transaction.create') }}" />
                         </div>
                         <div>
                             @if (session('success'))
@@ -50,24 +50,44 @@
                                     Tanggal Keluar
                                 </th>
                                 <th scope="col" class="px-6 py-3">
+                                    Status
+                                </th>
+                                <th scope="col" class="px-6 py-3">
                                     Action
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($todos as $todo)
+                            @forelse ($transactions as $transaction)
                                 <tr class="odd:bg-white odd:dark:bg-gray-800 even:bg-gray-50 even:dark:bg-gray-700">
                                     <td scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                                        <a href="{{ route('todo.edit', $todo) }}"
-                                            class="hover:underline">{{ $todo->title }}</a>
+                                        <a href="{{ route('transaction.edit', $transaction) }}"
+                                            class="hover:underline">{{ $transaction->customer }}</a>
                                     </td>
                                     <td scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                                        @if ($todo->category_id)
-                                            {{ $todo->category->title }}
+                                        @if ($transaction->service_id)
+                                            {{ $transaction->service->customer }}
                                         @endif
                                     </td>
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                                        @if ($transaction->service_id)
+                                            {{ $transaction->service->customer }}
+                                        @endif
+                                    </td>
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                                        {{-- <a href="{{ route('transaction.edit', $transaction) }}"
+                                            class="hover:underline">{{ $transaction->title }}</a> --}}
+                                    </td>
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                                        {{-- <a href="{{ route('transaction.edit', $transaction) }}"
+                                            class="hover:underline">{{ $transaction->title }}</a> --}}
+                                    </td>
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                                        {{-- <a href="{{ route('transaction.edit', $transaction) }}"
+                                            class="hover:underline">{{ $transaction->title }}</a> --}}
+                                    </td>
                                     <td class="hidden px-6 py-4 md:block">
-                                        @if ($todo->is_complete == false)
+                                        @if ($transaction->is_complete == false)
                                             <span
                                                 class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
                                                 Ongoing
@@ -82,8 +102,9 @@
                                     <td class="px-6 py-4">
                                         <div class="flex space-x-3">
                                             {{-- Action Here --}}
-                                            @if ($todo->is_complete == false)
-                                                <form action="{{ route('todo.complete', $todo) }}" method="Post">
+                                            @if ($transaction->is_complete == false)
+                                                <form action="{{ route('transaction.complete', $transaction) }}"
+                                                    method="Post">
                                                     @csrf
                                                     @method('PATCH')
                                                     <button type="submit" class="text-green-600 dark:text-green-400">
@@ -91,7 +112,8 @@
                                                     </button>
                                                 </form>
                                             @else
-                                                <form action="{{ route('todo.uncomplete', $todo) }}" method="Post">
+                                                <form action="{{ route('transaction.uncomplete', $transaction) }}"
+                                                    method="Post">
                                                     @csrf
                                                     @method('PATCH')
                                                     <button type="submit" class="text-blue-600 dark:text-blue-400">
@@ -99,7 +121,8 @@
                                                     </button>
                                                 </form>
                                             @endif
-                                            <form action="{{ route('todo.destroy', $todo) }}" method="Post">
+                                            <form action="{{ route('transaction.destroy', $transaction) }}"
+                                                method="Post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="text-red-600 dark:text-red-400">
@@ -120,9 +143,9 @@
                         </tbody>
                     </table>
                 </div>
-                @if ($todosCompleted > 1)
+                @if ($transactionsCompleted > 1)
                     <div class="p-6 text-xl text-gray-900 dark:text-gray-100">
-                        <form action="{{ route('todo.deleteallcompleted') }}" method="Post">
+                        <form action="{{ route('transaction.deleteallcompleted') }}" method="Post">
                             @csrf
                             @method('delete')
                             <x-primary-button>

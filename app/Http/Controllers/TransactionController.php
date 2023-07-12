@@ -24,7 +24,7 @@ class TransactionController extends Controller
     {
         $request->validate([
             'customer' => 'required|max:255',
-            // 'service_id' => 'required|exists:services,id',
+            'service_id' => 'required|exists:services,id',
             'berat' => 'required|numeric',
             'tgl_masuk' => 'required|date',
             'tgl_keluar' => 'required|date',
@@ -34,7 +34,7 @@ class TransactionController extends Controller
 
         $transaction = Transaction::create([
             'customer' => $request->customer,
-            // 'service_id' => $request->service_id,
+            'service_id' => $request->service_id,
             'berat' => $request->berat,
             'total_harga' => $request->berat * $service->harga,
             'tgl_masuk' => $request->tgl_masuk,

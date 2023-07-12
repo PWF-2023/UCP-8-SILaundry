@@ -12,7 +12,7 @@ class Transaction extends Model
     protected $fillable = [
         'customer',
         'user_id',
-        'layanan_id',
+        'service_id',
         'berat',
         'total_harga',
         'tgl_masuk',
