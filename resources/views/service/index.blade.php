@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="flex items-center justify-between mb-6">
                         <div>
-                            <x-create-button-service href="{{ route('transaction.create') }}" />
+                            <x-create-button-service href="{{ route('service.create') }}" />
                         </div>
                         <div>
                             @if (session('success'))

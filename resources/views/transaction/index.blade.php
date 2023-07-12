@@ -28,9 +28,8 @@
                     </div>
                     <div class="relative overflow-x-auto">
                         <table
-                            class="w-full text-sm text-left text-gray-500 dark:text-gray-400 bg-blue-100 dark:bg-blue-900 border border-blue-200">
-                            <thead
-                                class="text-xs text-gray-700 uppercase bg-blue-100 dark:bg-blue-900 dark:text-gray-400">
+                            class="w-full text-sm text-left text-gray-500 dark:text-gray-400 bg-blue-100 dark:bg-blue-900 border border-blue-200 dark:border-white">
+                            <thead class="text-xs text-gray-700 uppercase bg-blue-100 dark:bg-white dark:text-black">
                                 <tr>
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
