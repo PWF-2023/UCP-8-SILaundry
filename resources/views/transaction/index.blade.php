@@ -65,14 +65,15 @@
                                             class="hover:underline">{{ $transaction->customer }}</a>
                                     </td>
                                     <td scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                                        @if ($transaction->service_id)
+                                        {{-- @if ($transaction->service_id)
                                             {{ $transaction->service->customer }}
-                                        @endif
+                                        @endif --}}
                                     </td>
+
                                     <td scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                                        @if ($transaction->service_id)
+                                        {{-- @if ($transaction->service_id)
                                             {{ $transaction->service->customer }}
-                                        @endif
+                                        @endif --}}
                                     </td>
                                     <td scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
                                         {{-- <a href="{{ route('transaction.edit', $transaction) }}"
