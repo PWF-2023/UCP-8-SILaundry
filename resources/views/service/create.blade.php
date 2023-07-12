@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-            {{ __('Create New Service') }}
+            {{ __('Create Transaction Service') }}
         </h2>
     </x-slot>
 
@@ -17,6 +17,12 @@
                             <x-text-input id="title" name="title" type="text" class="block w-full mt-1"
                                 required autofocus autocomplete="title" />
                             <x-input-error class="mt-2" :messages="$errors->get('title')" />
+                        </div>
+                        <div class="mb-6">
+                            <x-input-label for="harga" :value="__('Harga')" />
+                            <x-text-input id="harga" name="harga" type="decimal" class="block w-full mt-1"
+                                required autofocus autocomplete="harga" />
+                            <x-input-error class="mt-2" :messages="$errors->get('harga')" />
                         </div>
                         <div class="flex items-center gap-4">
                             <x-primary-button>{{ __('Save') }}</x-primary-button>

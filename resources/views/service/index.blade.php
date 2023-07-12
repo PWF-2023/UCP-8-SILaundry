@@ -38,7 +38,7 @@
                                     Title
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Servie
+                                    Harga
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Action
@@ -53,8 +53,9 @@
                                             {{ $service->title }}</a>
                                     </td>
                                     <td class="px-6 py-4 md:block">
-                                        <p>{{ $service->transactions>count() }}
-                                        </p>
+                                        <a href="{{ route('service.edit', $service) }}"
+                                            class="hover:underline">{{ $service->harga }}
+                                        </a>
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="flex space-x-3">
