@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/transaction/{transaction}/incomplete', [TransactionController::class, 'uncomplete'])->name('transaction.uncomplete');
     Route::delete('/transaction/{transaction}', [TransactionController::class, 'destroy'])->name('transaction.destroy');
     Route::delete('/transaction', [TransactionController::class, 'destroyCompleted'])->name('transaction.deleteallcompleted');
+
+    Route::get('/service', [ServiceController::class, 'index'])->name('service.index');
+    Route::post('/service', [ServiceController::class, 'store'])->name('service.store');
+    Route::get('/service/create', [ServiceController::class, 'create'])->name('service.create');
+    Route::get('/service/{service}/edit', [ServiceController::class, 'edit'])->name('service.edit');
+    Route::patch('/service/{service}', [ServiceController::class, 'update'])->name('service.update');
+    Route::delete('/service/{service}', [ServiceController::class, 'destroy'])->name('service.destroy');
 
 });
 
