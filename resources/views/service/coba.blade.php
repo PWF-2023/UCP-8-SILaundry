@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="flex items-center justify-between mb-6">
                         <div>
-                            <x-create-button-service href="{{ route('transaction.create') }}" />
+                            <x-create-button-transaction href="{{ route('transaction.create') }}" />
                         </div>
                         <div>
                             @if (session('success'))
@@ -87,6 +87,17 @@
                             </tbody>
                         </table>
                     </div>
+                    @if ($transactionsCompleted > 1)
+                        <div class="p-6 text-xl text-gray-900 dark:text-gray-100">
+                            <form action="{{ route('transaction.deleteallcompleted') }}" method="Post">
+                                @csrf
+                                @method('delete')
+                                <x-primary-button>
+                                    Delete All Completed Task
+                                </x-primary-button>
+                            </form>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
