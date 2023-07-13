@@ -19,7 +19,7 @@
                             <x-input-error class="mt-2" :messages="$errors->get('title')" />
                         </div>
                         <div class="mb-6">
-                            <x-input-label for="harga" :value="__('Harga')" />
+                            <x-input-label for="harga" :value="__('Price/Kg')" />
                             <x-text-input id="harga" name="harga" type="decimal" class="block w-full mt-1"
                                 required autofocus autocomplete="harga" />
                             <x-input-error class="mt-2" :messages="$errors->get('harga')" />

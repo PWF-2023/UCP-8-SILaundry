@@ -36,22 +36,22 @@
                                         No
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Nama Pelanggan
+                                        Customer Name
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Service
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Berat (Kg)
+                                        Weight(Kg)
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Total Bayar
+                                        Total Price
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Tanggal Masuk
+                                        Entry Date
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Tanggal Keluar
+                                        Out Date
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Status

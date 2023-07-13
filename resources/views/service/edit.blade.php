@@ -18,6 +18,12 @@
                                 :value="old('name', $service->title)" required autofocus autocomplete="title" />
                             <x-input-error class="mt-2" :messages="$errors->get('title')" />
                         </div>
+                        <div class="mb-6">
+                            <x-input-label for="harga" :value="__('Price/Kg')" />
+                            <x-text-input id="harga" name="harga" type="decimal" class="mt-1 block w-full"
+                                :value="old('name', $service->harga)" required autofocus autocomplete="harga" />
+                            <x-input-error class="mt-2" :messages="$errors->get('harga')" />
+                        </div>
                         <div class="flex items-center gap-4">
                             <x-primary-button>{{ __('Save') }}</x-primary-button>
                             <x-cancel-button href="{{ route('service.index') }}" />
