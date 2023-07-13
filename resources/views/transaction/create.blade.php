@@ -13,7 +13,7 @@
                         @csrf
                         @method('post')
                         <div class="mb-6">
-                            <x-input-label for="customer" :value="__('Customer')" />
+                            <x-input-label for="customer" :value="__('Customer Name')" />
                             <x-text-input id="customer" name="customer" type="text" class="block w-full mt-1"
                                 required autofocus autocomplete="customer" />
                             <x-input-error class="mt-2" :messages="$errors->get('customer')" />
@@ -31,19 +31,19 @@
                             <x-input-error class="mt-2" :messages="$errors->get('service_id')" />
                         </div>
                         <div class="mb-6">
-                            <x-input-label for="berat" :value="__('Berat(Kg)')" />
+                            <x-input-label for="berat" :value="__('Weight(Kg)')" />
                             <x-text-input id="berat" name="berat" type="text" class="block w-full mt-1"
                                 required autofocus autocomplete="berat" />
                             <x-input-error class="mt-2" :messages="$errors->get('berat')" />
                         </div>
                         <div class="mb-6">
-                            <x-input-label for="tgl_masuk" :value="__('Tanggal Masuk')" />
+                            <x-input-label for="tgl_masuk" :value="__('Entry Date')" />
                             <x-text-input id="tgl_masuk" name="tgl_masuk" type="date" class="block w-2/4 mt-1"
                                 required autofocus autocomplete="tgl_masuk" />
                             <x-input-error class="mt-2" :messages="$errors->get('tgl_masuk')" />
                         </div>
                         <div class="mb-6">
-                            <x-input-label for="tgl_keluar" :value="__('Tanggal Keluar')" />
+                            <x-input-label for="tgl_keluar" :value="__('Out Date')" />
                             <x-text-input id="tgl_keluar" name="tgl_keluar" type="date" class="block w-2/4 mt-1"
                                 required autofocus autocomplete="tgl_keluar" />
                             <x-input-error class="mt-2" :messages="$errors->get('tgl_keluar')" />
@@ -60,9 +60,9 @@
                         <table class="w-full">
                             <thead>
                                 <tr>
-                                    <th class="px-4 py-2 text-left">Berat (Kg)</th>
-                                    <th class="px-4 py-2 text-left">Harga</th>
-                                    <th class="px-4 py-2 text-left">Total Harga</th>
+                                    <th class="px-4 py-2 text-left">Weight(Kg)</th>
+                                    <th class="px-4 py-2 text-left">Price/Kg</th>
+                                    <th class="px-4 py-2 text-left">Total Price</th>
                                 </tr>
                             </thead>
                             <tbody>

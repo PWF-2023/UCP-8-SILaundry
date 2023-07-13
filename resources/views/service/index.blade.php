@@ -40,7 +40,7 @@
                                         Title
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Harga
+                                        Price/Kg
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Action
