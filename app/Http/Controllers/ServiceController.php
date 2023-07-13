@@ -31,7 +31,8 @@ class ServiceController extends Controller
 
     public function create()
     {
-        return view('service.create');
+        $services = Service::all();
+        return view('service.create', compact('services'));
     }
 
     public function edit(Service $service)
