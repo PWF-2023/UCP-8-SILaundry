@@ -21,6 +21,11 @@
                     <x-nav-link :href="route('service.index')" :active="request()->routeIs('service.index')" class="hover:text-blue-800">
                         {{ __('Service') }}
                     </x-nav-link>
+                    @can('admin')
+                        <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+                            {{ __('User') }}
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
@@ -90,6 +95,11 @@
             <x-responsive-nav-link :href="route('service.index')" :active="request()->routeIs('service.index')">
                 {{ __('Service') }}
             </x-responsive-nav-link>
+            @can('admin')
+                <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+                    {{ __('User') }}
+                </x-responsive-nav-link>
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->
