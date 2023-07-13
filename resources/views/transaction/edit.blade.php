@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <form method="post" action="{{ route('transaction.update', $transaction->id) }}" class="">
@@ -39,13 +39,13 @@
                         </div>
                         <div class="mb-6">
                             <x-input-label for="tgl_masuk" :value="__('Tanggal Masuk)')" />
-                            <x-text-input id="tgl_masuk" name="tgl_masuk" type="date" class="block w-full mt-1"
+                            <x-text-input id="tgl_masuk" name="tgl_masuk" type="date" class="block w-2/4 mt-1"
                                 :value="$transaction->tgl_masuk" required autofocus autocomplete="tgl_masuk" />
                             <x-input-error class="mt-2" :messages="$errors->get('tgl_masuk')" />
                         </div>
                         <div class="mb-6">
                             <x-input-label for="tgl_keluar" :value="__('Tanggal Keluar')" />
-                            <x-text-input id="tgl_keluar" name="tgl_keluar" type="date" class="block w-full mt-1"
+                            <x-text-input id="tgl_keluar" name="tgl_keluar" type="date" class="block w-2/4 mt-1"
                                 :value="$transaction->tgl_keluar" required autofocus autocomplete="tgl_keluar" />
                             <x-input-error class="mt-2" :messages="$errors->get('tgl_keluar')" />
                         </div>
