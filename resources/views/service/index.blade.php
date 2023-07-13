@@ -11,7 +11,9 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="flex items-center justify-between mb-6">
                         <div>
+                            @can('admin')
                             <x-create-button-service href="{{ route('service.create') }}" />
+                            @endcan
                         </div>
                         <div>
                             @if (session('success'))
