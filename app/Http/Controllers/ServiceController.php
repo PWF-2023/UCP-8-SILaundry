@@ -9,8 +9,7 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        $services = Service::where('user_id', auth()->user()->id)
-            ->orderBy('created_at', 'desc')
+        $services = Service::orderBy('created_at', 'desc')
             ->get();
         return view('service.index', compact('services'));
     }
@@ -59,7 +58,7 @@ class ServiceController extends Controller
 
     public function destroy(Service $service)
     {
-        if (auth()->user()->id == $service->user_id) {
+        if (auth()->user()->is_admin) {
             $service->delete();
             return redirect()->route('service.index')->with('success', 'Service deleted successfully!');
         } else {
