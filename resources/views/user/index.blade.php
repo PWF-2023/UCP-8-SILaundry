@@ -66,6 +66,7 @@
                                     <td scope="row"
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         <p>{{ $user->id }}</p>
+
                                     </td>
                                     <td
                                         class="px-6 py-4 font-medium text-gray-900 md:whitespace-nowrap dark:text-white">
@@ -84,6 +85,21 @@
                                             </span>
                                         </p>
                                     </td>
+                                    {{-- <td class="px-6 py-4 whitespace-nowrap">
+                                        @if ($user->transactions)
+                                            <p>{{ $user->transactions->count() }}
+                                                <span>
+                                                    <span class="text-green-600 dark:text-green-400">
+                                                        ({{ $user->transactions->where('is_complete', true)->count() }}
+                                                    </span>/
+                                                    <span class="text-blue-600 dark:text-blue-400">
+                                                        {{ $user->transactions->where('is_complete', false)->count() }})</span>
+                                                </span>
+                                            </p>
+                                        @else
+                                            <p>No transactions available</p>
+                                        @endif
+                                    </td> --}}
                                     <td class="px-6 py-4">
                                         <div class="flex space-x-3">
                                             {{-- Action here --}}
