@@ -25,7 +25,7 @@ class TransactionController extends Controller
         $request->validate([
             'customer' => 'required|max:255',
             'service_id' => 'nullable',
-            'berat' => 'required|numeric',
+            'berat' => 'required|double',
             'tgl_masuk' => 'required|date',
             'tgl_keluar' => 'required|date',
         ]);
@@ -48,13 +48,21 @@ class TransactionController extends Controller
 
     public function create()
     {
-        $services = Service::where('user_id', auth()->user()->id)->get();
+        if (auth()->user()->is_admin) {
+            $services = Service::all();
+        } else {
+            $services = Service::where('user_id', '!=', auth()->user()->id)->get();
+        }
         return view('transaction.create', compact('services'));
     }
 
     public function edit(Transaction $transaction)
     {
-        $services = Service::where('user_id', auth()->user()->id)->get();
+        if (auth()->user()->is_admin) {
+            $services = Service::all();
+        } else {
+            $services = Service::where('user_id', '!=', auth()->user()->id)->get();
+        }
 
         if (auth()->user()->id == $transaction->user_id) {
             return view('transaction.edit', compact('transaction', 'services'));
@@ -67,7 +75,7 @@ class TransactionController extends Controller
     {
         $request->validate([
             'customer' => 'required|max:255',
-            'service_id' => 'nullable',
+            'service_id' => 'required',
             'berat' => 'required|numeric',
             'tgl_masuk' => 'required|date',
             'tgl_keluar' => 'required|date',
