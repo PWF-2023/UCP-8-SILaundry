@@ -36,7 +36,7 @@ class ServiceController extends Controller
 
     public function edit(Service $service)
     {
-        if (auth()->user()->id == $service->user_id) {
+        if (auth()->user()->is_admin) {
             return view('service.edit', compact('service'));
         } else {
             return redirect()->route('service.index')->with('danger', 'You are not authorized to edit this service!');
