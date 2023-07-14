@@ -11,9 +11,9 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="flex items-center justify-between mb-6">
                         <div>
-                            @can('!=admin')
+                            @if(!auth()->user()->is_admin)
                                 <x-create-button-transaction href="{{ route('transaction.create') }}" />
-                            @endcan
+                            @endif
                         </div>
 
                         <div>
