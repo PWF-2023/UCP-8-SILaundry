@@ -10,12 +10,10 @@ class TransactionController extends Controller
 {
     public function index()
     {
-        $transactions = Transaction::where('user_id', auth()->user()->id)
-            ->orderBy('is_complete', 'asc')
+        $transactions = Transaction::orderBy('is_complete', 'asc')
             ->orderBy('created_at', 'desc')
             ->get();
-        $transactionsCompleted = Transaction::where('user_id', auth()->user()->id)
-            ->where('is_complete', true)
+        $transactionsCompleted = Transaction::where('is_complete', true)
             ->count();
         return view('transaction.index', compact('transactions', 'transactionsCompleted'));
     }
@@ -97,31 +95,23 @@ class TransactionController extends Controller
 
     public function complete(Transaction $transaction)
     {
-        if (auth()->user()->id == $transaction->user_id) {
-            $transaction->update([
-                'is_complete' => true,
-            ]);
-            return redirect()->route('transaction.index')->with('success', 'Transaction completed successfully!');
-        } else {
-            return redirect()->route('transaction.index')->with('danger', 'You are not authorized to complete this transaction!');
-        }
+        $transaction->update([
+            'is_complete' => true,
+        ]);
+        return redirect()->route('transaction.index')->with('success', 'Transaction completed successfully!');
     }
 
     public function uncomplete(Transaction $transaction)
     {
-        if (auth()->user()->id == $transaction->user_id) {
-            $transaction->update([
+        $transaction->update([
                 'is_complete' => false,
             ]);
-            return redirect()->route('transaction.index')->with('success', 'Transaction uncompleted successfully!');
-        } else {
-            return redirect()->route('transaction.index')->with('danger', 'You are not authorized to uncomplete this transaction!');
-        }
+        return redirect()->route('transaction.index')->with('success', 'Transaction uncompleted successfully!');
     }
 
     public function destroy(Transaction $transaction)
     {
-        if (auth()->user()->id == $transaction->user_id) {
+        if (auth()->user()->id == $transaction->user_id || auth()->user()->is_admin) {
             $transaction->delete();
             return redirect()->route('transaction.index')->with('success', 'Transaction deleted successfully!');
         } else {
@@ -131,8 +121,8 @@ class TransactionController extends Controller
 
     public function destroyCompleted()
     {
-        $transactionsCompleted = Transaction::where('user_id', auth()->user()->id)
-            ->where('is_complete', true)
+        if (auth()->user()->is_admin) {
+        $transactionsCompleted = Transaction::where('is_complete', true)
             ->get();
 
         foreach ($transactionsCompleted as $transaction) {
@@ -140,5 +130,8 @@ class TransactionController extends Controller
         }
 
         return redirect()->route('transaction.index')->with('success', 'All completed transactions deleted successfully!');
+    } else {
+        return redirect()->route('transaction.index')->with('danger', 'You are not authorized to perform this action!');
     }
+}
 }
