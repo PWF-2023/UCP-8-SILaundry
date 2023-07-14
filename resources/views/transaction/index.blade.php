@@ -10,11 +10,18 @@
             <div class="overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="flex items-center justify-between mb-6">
-                        <div>
+                        {{-- <div>
                             @can('!=admin')
                                 <x-create-button-transaction href="{{ route('transaction.create') }}" />
                             @endcan
+                        </div> --}}
+                        <div>
+                            @unless(auth()->user() && auth()->user()->isAdmin())
+                                <x-create-button-transaction href="{{ route('transaction.create') }}" />
+                            @endunless
                         </div>
+
+
 
                         <div>
                             @if (session('success'))
