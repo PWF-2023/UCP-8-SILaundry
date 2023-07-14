@@ -47,7 +47,7 @@ class TransactionController extends Controller
     public function create()
     {
         if (auth()->user()->is_admin) {
-            $services = Service::all();
+            return redirect()->route('transaction.index')->with('danger', 'You are not authorized to create transactions!');
         } else {
             $services = Service::where('user_id', '!=', auth()->user()->id)->get();
         }
@@ -57,16 +57,11 @@ class TransactionController extends Controller
     public function edit(Transaction $transaction)
     {
         if (auth()->user()->is_admin) {
-            $services = Service::all();
-        } else {
-            $services = Service::where('user_id', '!=', auth()->user()->id)->get();
+            return redirect()->route('transaction.index')->with('danger', 'You are not authorized to edit transactions!');
         }
 
-        if (auth()->user()->id == $transaction->user_id) {
-            return view('transaction.edit', compact('transaction', 'services'));
-        } else {
-            return redirect()->route('transaction.index')->with('danger', 'You are not authorized to edit this transaction!');
-        }
+        $services = Service::where('user_id', '!=', auth()->user()->id)->get();
+        return view('transaction.edit', compact('transaction', 'services'));
     }
 
     public function update(Request $request, Transaction $transaction)
@@ -111,7 +106,7 @@ class TransactionController extends Controller
 
     public function destroy(Transaction $transaction)
     {
-        if (auth()->user()->id == $transaction->user_id || auth()->user()->is_admin) {
+        if (auth()->user()->is_admin) {
             $transaction->delete();
             return redirect()->route('transaction.index')->with('success', 'Transaction deleted successfully!');
         } else {
