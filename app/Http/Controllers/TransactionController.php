@@ -25,7 +25,7 @@ class TransactionController extends Controller
         $request->validate([
             'customer' => 'required|max:255',
             'service_id' => 'nullable',
-            'berat' => 'required|double',
+            'berat' => 'required|numeric',
             'tgl_masuk' => 'required|date',
             'tgl_keluar' => 'required|date',
         ]);
