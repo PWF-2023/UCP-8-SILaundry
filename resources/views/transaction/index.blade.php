@@ -11,8 +11,11 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="flex items-center justify-between mb-6">
                         <div>
-                            <x-create-button-transaction href="{{ route('transaction.create') }}" />
+                            @can('!=admin')
+                                <x-create-button-transaction href="{{ route('transaction.create') }}" />
+                            @endcan
                         </div>
+
                         <div>
                             @if (session('success'))
                                 <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)"
