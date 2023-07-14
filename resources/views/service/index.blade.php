@@ -12,7 +12,7 @@
                     <div class="flex items-center justify-between mb-6">
                         <div>
                             @can('admin')
-                            <x-create-button-service href="{{ route('service.create') }}" />
+                                <x-create-button-service href="{{ route('service.create') }}" />
                             @endcan
                         </div>
                         <div>
@@ -34,7 +34,6 @@
                             <thead
                                 class="text-xs text-gray-700 uppercase bg-blue-100 dark:bg-blue-900 dark:text-gray-400">
                                 <tr>
-                                <tr>
                                     <th scope="col" class="px-6 py-3">
                                         No
                                     </th>
@@ -44,9 +43,11 @@
                                     <th scope="col" class="px-6 py-3">
                                         Price/Kg
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Action
-                                    </th>
+                                    @can('admin')
+                                        <th scope="col" class="px-6 py-3">
+                                            Action
+                                        </th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody>
@@ -67,17 +68,19 @@
                                                 class="hover:underline">{{ $service->harga }}
                                             </a>
                                         </td>
-                                        <td class="px-6 py-4">
-                                            <div class="flex space-x-3">
-                                                <form action="{{ route('service.destroy', $service) }}" method="Post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="text-red-600 dark:text-red-400">
-                                                        Delete
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
+                                        @can('admin')
+                                            <td class="px-6 py-4">
+                                                <div class="flex space-x-3">
+                                                    <form action="{{ route('service.destroy', $service) }}" method="Post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="text-red-600 dark:text-red-400">
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        @endcan
                                     </tr>
                                 @empty
                                     <tr class="bg-white dark:bg-gray-800">
@@ -92,4 +95,5 @@
                 </div>
             </div>
         </div>
+    </div>
 </x-app-layout>
